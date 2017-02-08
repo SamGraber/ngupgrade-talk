@@ -15,7 +15,7 @@
 			self.averagePace = toDate(average(timeList));
 		});
 
-		self.goalMinusAverage = () => new Date(self.averagePace - self.goal);
+		self.averageMinusGoal = () => new Date(self.averagePace - self.goal);
 
 		self.setGoal = () => {
 			goalService.putGoal(self.pendingGoal).then(() => {

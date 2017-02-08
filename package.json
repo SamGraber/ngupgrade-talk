@@ -6,7 +6,8 @@
   "scripts": {
     "json-server": "json-server --watch data.json",
     "http-server": "http-server",
-    "start": "npm-run-all --parallel json-server http-server"
+    "start": "npm-run-all --parallel json-server http-server",
+    "test": "karma start config/karma.conf.js"
   },
   "author": "Sam Graber <sgraber@renovo1.com>",
   "license": "ISC",
@@ -17,5 +18,17 @@
     "http-server": "^0.9.0",
     "json-server": "^0.9.4",
     "npm-run-all": "^4.0.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.2",
+    "chai": "^3.5.0",
+    "jasmine": "^2.5.3",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-sinon": "^1.0.5",
+    "sinon": "^1.17.7"
   }
 }

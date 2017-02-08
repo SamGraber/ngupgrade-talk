@@ -9,9 +9,10 @@
 	timeService.$inject = ['$http'];
 	function timeService($http) {
 		var self = this;
-		this.getTimeList = () => $http.get(baseUrl + '/time').then(response => response.data);
-		this.postTime = time => $http.post(baseUrl + '/time', time).then(response => response.data);
-		this.deleteTime = time => $http.delete(baseUrl + '/time/' + time.id);
+		self.$http = $http;
+		this.getTimeList = () => self.$http.get(baseUrl + '/time').then(response => response.data);
+		this.postTime = time => self.$http.post(baseUrl + '/time', time).then(response => response.data);
+		this.deleteTime = time => self.$http.delete(baseUrl + '/time/' + time.id);
 	}
 
 }());

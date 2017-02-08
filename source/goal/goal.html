@@ -13,7 +13,7 @@
 </div>
 <div ng-if="$ctrl.goal">
 	<p>Your goal is {{$ctrl.goal | date:"m:ss"}} minutes per mile</p>
-	<p>To reach your goal, you will need to improve your average by {{$ctrl.goalMinusAverage() | date:"m:ss"}} minutes per mile</p>
+	<p>To reach your goal, you will need to improve your average by {{$ctrl.averageMinusGoal() | date:"m:ss"}} minutes per mile</p>
 	<div class="form-group">
 		<button class="btn btn-danger" ng-click="$ctrl.clearGoal()">Clear goal</button>
 	</div>
