@@ -8,7 +8,8 @@
 		$locationProvider.hashPrefix('!');
 
 		$routeProvider.when('/home', {
-			template: '<h1>Welcome!</h1',
+			template: '<h3>Welcome!</h3>' +
+			'<p><a href="#!addtime">Add time</a> to begin.</p>',
 		})
 		.when('/timelist', {
 			template: '<time-list></time-list>',
