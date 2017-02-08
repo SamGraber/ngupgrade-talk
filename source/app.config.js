@@ -13,7 +13,10 @@
 		.when('/timelist', {
 			template: '<time-list></time-list>',
 		})
+		.when('/addtime', {
+			template: '<add-time></add-time>',
+		})
 		.otherwise('/home');
 	};
-	
+
 }());
