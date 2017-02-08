@@ -17,6 +17,9 @@
 		.when('/addtime', {
 			template: '<add-time></add-time>',
 		})
+		.when('/goal', {
+			template: '<goal></goal>',
+		})
 		.otherwise('/home');
 	};
 

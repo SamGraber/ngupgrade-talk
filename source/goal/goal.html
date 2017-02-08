@@ -1,0 +1,20 @@
+<p>Your current average pace is {{$ctrl.averagePace | date:"m:ss"}} minutes per mile</p>
+<div ng-if="!$ctrl.goal">
+	<p>What is your desired pace?</p>
+	<div class="form-group row">
+		<div class="col-xs-6">
+			<input class="form-control" type="number" id="goal" ng-model="$ctrl.pendingGoal" />
+		</div>
+		<div class="col-xs-6 form-control-static">minutes per mile</div>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-primary" ng-click="$ctrl.setGoal()">Set goal</button>
+	</div>
+</div>
+<div ng-if="$ctrl.goal">
+	<p>Your goal is {{$ctrl.goal | date:"m:ss"}} minutes per mile</p>
+	<p>To reach your goal, you will need to improve your average by {{$ctrl.goalMinusAverage() | date:"m:ss"}} minutes per mile</p>
+	<div class="form-group">
+		<button class="btn btn-danger" ng-click="$ctrl.clearGoal()">Clear goal</button>
+	</div>
+</div>

@@ -3,5 +3,7 @@ angular.module('runCalculatorApp', [
 
 	'timeList',
 	'addTime',
+	'goal',
 	'timeService',
+	'goalService',
 ]);
