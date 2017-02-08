@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="runCalculatorApp">
+<head>
+	<meta charset="utf-8">
+	<title>My HTML File</title>
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-route/angular-route.js"></script>
+
+	<script src="source/app.module.js"></script>
+	<script src="source/app.config.js"></script>
+	<script src="source/timeList/timeList.js"></script>
+	<script src="source/services/time.service.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#!home">Running calculator</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#!timelist">Time list</a></li>
+			</ul>
+		</nav>
+		<div ng-view></div>
+	</div>
+</body>
+</html>

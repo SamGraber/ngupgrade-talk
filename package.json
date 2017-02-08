@@ -1,0 +1,21 @@
+{
+  "name": "ngupgrade-talk",
+  "version": "1.0.0",
+  "description": "Upgrade an angular 1 application to angular 2",
+  "main": "app.js",
+  "scripts": {
+    "json-server": "json-server --watch data.json",
+    "http-server": "http-server",
+    "start": "npm-run-all --parallel json-server http-server"
+  },
+  "author": "Sam Graber <sgraber@renovo1.com>",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "bootstrap": "^3.3.7",
+    "http-server": "^0.9.0",
+    "json-server": "^0.9.4",
+    "npm-run-all": "^4.0.1"
+  }
+}

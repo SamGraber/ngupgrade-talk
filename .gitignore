@@ -1,0 +1,5 @@
+# NPM package
+/node_modules/
+
+# App data
+data.json
