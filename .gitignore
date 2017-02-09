@@ -3,3 +3,7 @@
 
 # App data
 data.json
+
+# Build files
+source/**/*.js
+source/**/*.d.ts
