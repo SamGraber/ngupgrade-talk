@@ -1,5 +1,5 @@
 function calculatePace(time) {
-	return pace = time.time / time.distance;
+	return time.time / time.distance;
 }
 
 function toDate(minutes) {
