@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "json-server": "json-server --watch data.json",
-    "lite-server": "lite-server",
+    "lite-server": "lite-server -c config/lite-server.config.js",
     "start": "npm-run-all --parallel json-server lite-server",
     "test": "karma start config/karma.conf.js"
   },
