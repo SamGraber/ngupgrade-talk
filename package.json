@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "json-server": "json-server --watch data.json",
-    "lite-server": "lite-server",
+    "lite-server": "lite-server -c config/lite-server.config.js",
     "tsc": "tsc",
     "tsc.watch": "tsc -w",
     "start": "npm-run-all --parallel tsc.watch json-server lite-server",
