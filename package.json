@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "json-server": "json-server --watch data.json",
-    "lite-server": "lite-server -c config/lite-server.config.js",
+    "webpack-dev-server": "webpack-dev-server --config config/webpack.config.dev.js --inline --hot --open",
     "tsc": "tsc",
     "tsc.watch": "tsc -w",
-    "start": "npm-run-all --parallel tsc.watch json-server lite-server",
+    "start": "npm-run-all --parallel tsc.watch json-server webpack-dev-server",
     "test": "karma start config/karma.conf.js"
   },
   "author": "Sam Graber <sgraber@renovo1.com>",
@@ -19,15 +19,19 @@
     "angular-route": "^1.6.2",
     "bootstrap": "^3.3.7",
     "json-server": "^0.9.4",
-    "lite-server": "^2.2.2",
     "npm-run-all": "^4.0.1"
   },
   "devDependencies": {
     "@types/angular-mocks": "^1.5.9",
     "@types/chai": "^3.4.34",
     "@types/sinon": "^1.16.35",
+    "@types/webpack-dev-middleware": "^1.9.1",
     "angular-mocks": "^1.6.2",
+    "awesome-typescript-loader": "^3.0.0-beta.18",
     "chai": "^3.5.0",
+    "css-loader": "0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "2.22.0",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.1",
@@ -36,6 +40,13 @@
     "karma-jasmine": "^1.1.0",
     "karma-sinon": "^1.0.5",
     "sinon": "^1.17.7",
-    "typescript": "^2.1.6"
+    "source-map-loader": "^0.1.6",
+    "style-loader": "0.13.1",
+    "typescript": "^2.1.6",
+    "webpack": "2.1.0-beta.21",
+    "webpack-dev-middleware": "1.8.4",
+    "webpack-dev-server": "2.1.0-beta.8",
+    "webpack-hot-middleware": "2.13.0",
+    "webpack-md5-hash": "0.0.5"
   }
 }
