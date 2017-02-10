@@ -24,7 +24,7 @@ export class TimeService {
 	}
 
 	deleteTime(time: ITimeEntry): Observable<void> {
-		return this.http.delete(baseUrl + '/time' + time.id).map(() => null);
+		return this.http.delete(baseUrl + '/time/' + time.id).map(() => null);
 	}
 }
 
