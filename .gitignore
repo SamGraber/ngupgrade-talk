@@ -8,3 +8,4 @@ data.json
 source/**/*.js
 source/**/*.js.map
 source/**/*.d.ts
+/dist/
