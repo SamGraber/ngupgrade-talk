@@ -1,24 +1,35 @@
+import { NgModule, Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { downgradeComponent } from '@angular/upgrade/static';
 
-import { NgModule } from '@angular/core';
-
+import { TimeService } from '../services/time.service';
 import { calculatePace, toDate, remove } from '../services/utility';
 
-angular.module('timeList', [])
-	.component('timeList', {
-		templateUrl: './timeList.html',
-		controller: timeListController,
-	});
+export interface IFormattedTimeEntry {
+	id: number;
+	pace: Date;
+	time: Date;
+	distance: number;
+}
 
-timeListController.$inject = ['timeService'];
-function timeListController(timeService) {
-	var self = this;
-	timeService.getTimeList().subscribe(data => self.timeList = data.map(setPace).map(formatTimes));
+@Component({
+	selector: 'time-list',
+	templateUrl: './timeList.html',
+})
+export class TimeListComponent implements OnInit {
+	timeList: IFormattedTimeEntry[];
+	
+	constructor(private timeService: TimeService) {}
 
-	self.deleteTime = time => {
-		timeService.deleteTime(time).subscribe(() => remove(self.timeList, time));
-	};
+	ngOnInit(): void {
+		this.timeService.getTimeList().subscribe(data => this.timeList = data.map(this.setPace).map(this.formatTimes));
+	}
 
-	function setPace(time) {
+	deleteTime(time: IFormattedTimeEntry): void {
+		this.timeService.deleteTime(<any>time).subscribe(() => remove(this.timeList, time));
+	}
+
+	private setPace(time) {
 		return {
 			id: time.id,
 			pace: calculatePace(time),
@@ -27,7 +38,7 @@ function timeListController(timeService) {
 		};
 	}
 
-	function formatTimes(time) {
+	private formatTimes(time) {
 		return {
 			id: time.id,
 			pace: toDate(time.pace),
@@ -37,5 +48,14 @@ function timeListController(timeService) {
 	}
 }
 
-@NgModule({})
+angular.module('timeList', [])
+	.directive('timeList', downgradeComponent({
+		component: TimeListComponent,
+	}));
+
+@NgModule({
+	imports: [CommonModule],
+	declarations: [TimeListComponent],
+	entryComponents: [TimeListComponent],
+})
 export class TimeListModule {}

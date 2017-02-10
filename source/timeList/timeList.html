@@ -1,8 +1,8 @@
 <ul class="list-group">
-	<li class="list-group-item row" ng-repeat="time in $ctrl.timeList">
-		<div class="col-xs-4 form-control-static">{{time.distance | number}} miles</div>
+	<li class="list-group-item row" *ngFor="let time of timeList">
+		<div class="col-xs-4 form-control-static">{{time.distance | number:".0-3"}} miles</div>
 		<div class="col-xs-3 form-control-static">{{time.time | date:"mm:ss"}} minutes</div>
 		<div class="col-xs-3 form-control-static">{{time.pace | date:"m:ss"}} minutes per mile</div>
-		<div class="col-xs-2"><button class="btn btn-danger" ng-click="$ctrl.deleteTime(time)">Remove</button></div>
+		<div class="col-xs-2"><button class="btn btn-danger" (click)="deleteTime(time)">Remove</button></div>
 	</li>
 </ul>

@@ -1,31 +1,35 @@
 import { toDate } from '../services/utility';
+import { TimeListComponent } from './timeList';
 
-describe('timeListController', () => {
-	var ctrl;
-	var timeService;
+describe('TimeListComponent', () => {
+	let component: TimeListComponent;
+	let timeService;
 
 	beforeEach(() => {
-		angular.mock.module('timeList');
-		var initialTimeList = [{ id: 11, time: 4, distance: 2 }];
-		var expectedList = [{ id: 11, pace: toDate(2), time: toDate(4), distance: 2 }];
 		timeService = { 
-			getTimeList: sinon.spy(() => ({ subscribe: x => x(initialTimeList) })),
+			getTimeList: sinon.spy(),
 			deleteTime: sinon.spy(() => ({ subscribe: x => x() })),
 		};
-		inject($componentController => {
-			ctrl = $componentController('timeList', { timeService });
-		});
+		component = new TimeListComponent(timeService);
+	});
 
+	it('should get the list of time entries', () => {
+		let initialTimeList = [{ id: 11, time: 4, distance: 2 }];
+		let expectedList = [{ id: 11, pace: toDate(2), time: toDate(4), distance: 2 }];
+		timeService.getTimeList = sinon.spy(() => ({ subscribe: x => x(initialTimeList) }));
+
+		component.ngOnInit();
+		
 		sinon.assert.calledOnce(timeService.getTimeList);
-		expect(ctrl.timeList).to.deep.equal(expectedList);
+		expect(component.timeList).to.deep.equal(expectedList);
 	});
 	
 	it('should delete the time entry and remove it from the list', () => {
-		ctrl.timeList = [1, 2, 3];
+		component.timeList = <any>[1, 2, 3];
 
-		ctrl.deleteTime(2);
+		component.deleteTime(<any>2);
 
 		sinon.assert.calledOnce(timeService.deleteTime);
-		expect(ctrl.timeList).to.deep.equal([1, 3]);
+		expect(component.timeList).to.deep.equal([1, 3]);
 	});
 });

@@ -1,39 +1,67 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { downgradeComponent } from '@angular/upgrade/static';
 
+import { GoalService } from '../services/goal.service';
+import { TimeService, ITimeEntry } from '../services/time.service';
 import { calculatePace, toDate } from '../services/utility';
 
-angular.module('goal', [])
-	.component('goal', {
-		templateUrl: './goal.html',
-		controller: goalController,
-	});
+@Component({
+	selector: 'goal',
+	templateUrl: './goal.html',
+})
+export class GoalComponent implements OnInit {
+	goal: Date;
+	averagePace: Date;
+	pendingGoal: number;
+	
+	constructor(private goalService: GoalService
+			, private timeService: TimeService) {}
 
-goalController.$inject = ['goalService', 'timeService'];
-function goalController(goalService, timeService) {
-	var self = this;
-	goalService.getGoal().then(goal => self.goal = toDate(goal));
-	timeService.getTimeList().subscribe(timeList => {
-		self.averagePace = toDate(average(timeList));
-	});
-
-	self.averageMinusGoal = () => new Date(self.averagePace - self.goal);
-
-	self.setGoal = () => {
-		goalService.putGoal(self.pendingGoal).then(() => {
-			self.goal = toDate(self.pendingGoal);
-			self.pendingGoal = null;
+	ngOnInit(): void {
+		this.goalService.getGoal().subscribe(goal => this.goal = goal ? toDate(goal) : null);
+		this.timeService.getTimeList().subscribe(timeList => {
+			this.averagePace = toDate(this.average(timeList));
 		});
-	};
+	}
 
-	self.clearGoal = () => {
-		goalService.putGoal(null).then(() => self.goal = null);
-	};
+	averageMinusGoal(): Date {
+		if (!this.averagePace || !this.goal) {
+			return new Date(0);
+		}
 
-	function average(timeList) {
-		var total = timeList.reduce((accum, time) => accum + calculatePace(time), 0);
+		return new Date(this.averagePace.getTime() - this.goal.getTime());
+	}
+
+	setGoal(): void {
+		this.goalService.putGoal(this.pendingGoal).subscribe(() => {
+			this.goal = toDate(this.pendingGoal);
+			this.pendingGoal = null;
+		});
+	}
+
+	clearGoal(): void {
+		this.goalService.putGoal(null).subscribe(() => this.goal = null);
+	}
+
+	private average(timeList) {
+		const total = timeList.reduce((accum, time) => accum + calculatePace(time), 0);
 		return total / timeList.length;
 	}
 }
 
-@NgModule({})
+angular.module('goal', [])
+	.directive('goal', downgradeComponent({
+		component: GoalComponent,
+	}));
+
+@NgModule({
+	imports: [
+		CommonModule,
+		FormsModule,
+	],
+	declarations: [GoalComponent],
+	entryComponents: [GoalComponent],
+})
 export class GoalModule {}

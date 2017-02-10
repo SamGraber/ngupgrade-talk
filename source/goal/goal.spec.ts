@@ -1,56 +1,61 @@
 import { toDate } from '../services/utility';
+import { GoalComponent } from './goal';
 
-describe('goalController', () => {
-	var ctrl;
-	var goalService;
-	var timeService;
+describe('GoalComponent', () => {
+	let component: GoalComponent;
+	let goalService;
+	let timeService;
 
 	beforeEach(() => {
-		angular.mock.module('goal');
-		var initialGoal = 6;
-		var initialTimeList = [{ time: 4, distance: 2 }];
 		goalService = { 
-			getGoal: sinon.spy(() => ({ then: x => x(initialGoal) })),
-			putGoal: sinon.spy(() => ({ then: x => x() })),
+			getGoal: sinon.spy(),
+			putGoal: sinon.spy(() => ({ subscribe: x => x() })),
 		};
-		timeService = { getTimeList: sinon.spy(() => ({ subscribe: x => x(initialTimeList) })) }
-		inject($componentController => {
-			ctrl = $componentController('goal', { goalService, timeService });
-		});
+		timeService = { getTimeList: sinon.spy() }
+		component = new GoalComponent(goalService, timeService);
+	});
+
+	it('should get the goal and average time on init', () => {
+		let initialGoal = 6;
+		let initialTimeList = [{ time: 4, distance: 2 }];
+		goalService.getGoal = sinon.spy(() => ({ subscribe: x => x(initialGoal) }));
+		timeService.getTimeList = sinon.spy(() => ({ subscribe: x => x(initialTimeList) }));
+		
+		component.ngOnInit();
 
 		sinon.assert.calledOnce(goalService.getGoal);
 		sinon.assert.calledOnce(timeService.getTimeList);
-		expect(ctrl.goal).to.deep.equal(toDate(initialGoal));
-		expect(ctrl.averagePace).to.deep.equal(toDate(2));
+		expect(component.goal).to.deep.equal(toDate(initialGoal));
+		expect(component.averagePace).to.deep.equal(toDate(2));
 	});
 	
 	it('should get the average pace minus the goal as a date', () => {
-		ctrl.averagePace = 3;
-		ctrl.goal = 2;
+		component.averagePace = new Date(3);
+		component.goal = new Date(2);
 
-		var result = ctrl.averageMinusGoal();
+		let result = component.averageMinusGoal();
 
 		expect(result).to.deep.equal(new Date(1));
 	});
 	
 	it('should save the pending goal and set the goal value on the controller', () => {
-		ctrl.goal = null;
-		var goal = 3;
-		ctrl.pendingGoal = goal;
+		component.goal = null;
+		let goal = 3;
+		component.pendingGoal = goal;
 		
-		ctrl.setGoal();
+		component.setGoal();
 
 		sinon.assert.calledOnce(goalService.putGoal);
 		expect(goalService.putGoal.firstCall.args[0]).to.equal(goal);
-		expect(ctrl.pendingGoal).to.be.null;
-		expect(ctrl.goal.getMinutes()).to.equal(goal);
+		expect(component.pendingGoal).to.be.null;
+		expect(component.goal.getMinutes()).to.equal(goal);
 	});
 	
 	it('should make a request to clear the goal and clear it on the controller', () => {
-		ctrl.clearGoal();
+		component.clearGoal();
 
 		sinon.assert.calledOnce(goalService.putGoal);
 		expect(goalService.putGoal.firstCall.args[0]).to.be.null;
-		expect(ctrl.goal).to.be.null;
+		expect(component.goal).to.be.null;
 	});
 });
