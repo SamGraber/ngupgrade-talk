@@ -1,9 +1,9 @@
-<form ng-submit="$ctrl.saveTime()">
+<form (ngSubmit)="saveTime()">
 	<div class="form-group">
 		<label for="distance">Distance</label>
 		<div class="row">
 			<div class="col-xs-6">
-				<input class="form-control" type="number" id="distance" ng-model="$ctrl.time.distance" />
+				<input class="form-control" type="number" id="distance" name="distance" [(ngModel)]="time.distance" />
 			</div>
 			<div class="col-xs-6 form-control-static">miles</div>
 		</div>
@@ -12,7 +12,7 @@
 		<label for="time">Time</label>
 		<div class="row">
 			<div class="col-xs-6">
-				<input class="form-control" type="number" id="time" ng-model="$ctrl.time.time" />
+				<input class="form-control" type="number" id="time" name="time" [(ngModel)]="time.time" />
 			</div>
 			<div class="col-xs-6 form-control-static">minutes</div>
 		</div>

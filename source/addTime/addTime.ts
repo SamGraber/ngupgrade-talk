@@ -1,18 +1,33 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component, Inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UpgradeModule, downgradeComponent } from '@angular/upgrade/static';
 
-angular.module('addTime', [])
-	.component('addTime', {
-		templateUrl: './addTime.html',
-		controller: addTimeController,
-	});
+@Component({
+	selector: 'add-time',
+	templateUrl: './addTime.html',
+})
+export class AddTimeComponent {
+	time: any = {};
+	
+	constructor(@Inject('timeService') private timeService: any) {}
 
-addTimeController.$inject = ['timeService'];
-function addTimeController(timeService) {
-	var self = this;
-	self.saveTime = () => {
-		timeService.postTime(self.time).then(() => self.time = null);
-	};
+	saveTime(): void {
+		this.timeService.postTime(this.time).then(() => this.time = {});
+	}
 }
 
-@NgModule({})
+angular.module('addTime', [])
+	.directive('addTime', downgradeComponent({
+		component: AddTimeComponent,
+	}));
+
+@NgModule({
+	imports: [
+		FormsModule, 
+		UpgradeModule,
+	],
+	entryComponents: [AddTimeComponent],
+	declarations: [AddTimeComponent],
+	exports: [AddTimeComponent],
+})
 export class AddTimeModule {}

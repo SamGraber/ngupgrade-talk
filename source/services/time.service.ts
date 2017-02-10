@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 angular.module('timeService', [])
 	.service('timeService', timeService);
@@ -14,5 +15,13 @@ function timeService($http) {
 	this.deleteTime = time => self.$http.delete(baseUrl + '/time/' + time.id);
 }
 
-@NgModule({})
+export function upgradeTimeService(module: UpgradeModule): any {
+	return module.$injector.get('timeService');
+}
+
+@NgModule({
+	providers: [
+		{ provide: 'timeService', useFactory: upgradeTimeService, deps: [UpgradeModule] },
+	],
+})
 export class TimeServiceModule {}
