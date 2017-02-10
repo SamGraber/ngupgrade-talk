@@ -1,5 +1,7 @@
+import { Component } from '@angular/core';
 
-angular.module('runCalculatorApp', [])
-	.component('rcApp', {
-		templateUrl: './app.html',
-	});
+@Component({
+	selector: 'rc-app',
+	templateUrl: './app.html',
+})
+export class App {}
