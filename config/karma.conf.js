@@ -1,3 +1,5 @@
+var webpackConfig = require('./webpack.config.test');
+
 module.exports = function(karma) {
 	karma.set(baseConfig(karma));
 };
@@ -39,16 +41,28 @@ function baseConfig(karma) {
 			require('karma-jasmine'),
 			require('karma-chai'),
 			require('karma-sinon'),
-			require('karma-chrome-launcher')
+			require('karma-chrome-launcher'),
+			require('karma-webpack'),
+			require('karma-sourcemap-loader'),
 		],
 
 		files: [
-			{ pattern: 'node_modules/angular/angular.js', included: true, watched: true },
-			{ pattern: 'node_modules/angular-mocks/angular-mocks.js', included: true, watched: true },
+			{ pattern: 'source/services/utility.js', included: true, watched: true },
 			{ pattern: 'config/karma-test-setup.js', included: true, watched: true },
-			// { pattern: 'source/**/*.spec.js', included: true, watched: true },
-			{ pattern: 'source/app.module.js', included: true, watched: true },
-			{ pattern: 'source/**/*', included: true, watched: true },
 		],
+
+		preprocessors: {
+			'./config/karma-test-setup.js': ['webpack', 'sourcemap'],
+		},
+
+		webpack: webpackConfig,
+
+		webpackMiddleware: {
+			stats: 'errors-only',
+		},
+
+		webpackServer: {
+			noInfo: true,
+		},
 	};
 };
