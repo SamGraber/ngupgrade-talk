@@ -3,7 +3,7 @@ describe('addTimeController', () => {
 	var timeService;
 
 	beforeEach(() => {
-		module('addTime');
+		angular.mock.module('addTime');
 		timeService = { postTime: sinon.spy(() => ({ then: x => x() })) }
 		inject($componentController => {
 			ctrl = $componentController('addTime', { timeService });

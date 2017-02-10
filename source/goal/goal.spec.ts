@@ -4,7 +4,7 @@ describe('goalController', () => {
 	var timeService;
 
 	beforeEach(() => {
-		module('goal');
+		angular.mock.module('goal');
 		var initialGoal = 6;
 		var initialTimeList = [{ time: 4, distance: 2 }];
 		goalService = { 

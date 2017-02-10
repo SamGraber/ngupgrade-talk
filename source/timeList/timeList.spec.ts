@@ -3,7 +3,7 @@ describe('timeListController', () => {
 	var timeService;
 
 	beforeEach(() => {
-		module('timeList');
+		angular.mock.module('timeList');
 		var initialTimeList = [{ id: 11, time: 4, distance: 2 }];
 		var expectedList = [{ id: 11, pace: toDate(2), time: toDate(4), distance: 2 }];
 		timeService = { 
