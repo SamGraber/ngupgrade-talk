@@ -12,7 +12,7 @@ goalController.$inject = ['goalService', 'timeService'];
 function goalController(goalService, timeService) {
 	var self = this;
 	goalService.getGoal().then(goal => self.goal = toDate(goal));
-	timeService.getTimeList().then(timeList => {
+	timeService.getTimeList().subscribe(timeList => {
 		self.averagePace = toDate(average(timeList));
 	});
 

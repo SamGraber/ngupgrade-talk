@@ -9,8 +9,8 @@ describe('timeListController', () => {
 		var initialTimeList = [{ id: 11, time: 4, distance: 2 }];
 		var expectedList = [{ id: 11, pace: toDate(2), time: toDate(4), distance: 2 }];
 		timeService = { 
-			getTimeList: sinon.spy(() => ({ then: x => x(initialTimeList) })),
-			deleteTime: sinon.spy(() => ({ then: x => x() })),
+			getTimeList: sinon.spy(() => ({ subscribe: x => x(initialTimeList) })),
+			deleteTime: sinon.spy(() => ({ subscribe: x => x() })),
 		};
 		inject($componentController => {
 			ctrl = $componentController('timeList', { timeService });

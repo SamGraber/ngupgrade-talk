@@ -1,27 +1,42 @@
-import { NgModule } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { NgModule, Injectable } from '@angular/core';
+import { HttpModule, Http } from '@angular/http';
+import { downgradeInjectable } from '@angular/upgrade/static';
+import { Observable } from 'rxjs';
+
+export interface ITimeEntry {
+	id: number;
+	time: number;
+	distance: number;
+}
+
+const baseUrl = 'http://localhost:3000';
+
+@Injectable()
+export class TimeService {
+	constructor(private http: Http) {}
+
+	getTimeList(): Observable<ITimeEntry[]> {
+		return this.http.get(baseUrl + '/time').map(response => response.json());
+	}
+
+	postTime(time: ITimeEntry): Observable<ITimeEntry> {
+		return this.http.post(baseUrl + '/time', time).map(response => response.json());
+	}
+
+	deleteTime(time: ITimeEntry): Observable<void> {
+		return this.http.delete(baseUrl + '/time' + time.id).map(() => null);
+	}
+}
 
 angular.module('timeService', [])
-	.service('timeService', timeService);
-
-var baseUrl = 'http://localhost:3000';
-
-timeService.$inject = ['$http'];
-function timeService($http) {
-	var self = this;
-	self.$http = $http;
-	this.getTimeList = () => self.$http.get(baseUrl + '/time').then(response => response.data);
-	this.postTime = time => self.$http.post(baseUrl + '/time', time).then(response => response.data);
-	this.deleteTime = time => self.$http.delete(baseUrl + '/time/' + time.id);
-}
-
-export function upgradeTimeService(module: UpgradeModule): any {
-	return module.$injector.get('timeService');
-}
+	.service('timeService', downgradeInjectable(TimeService));
 
 @NgModule({
+	imports: [
+		HttpModule,
+	],
 	providers: [
-		{ provide: 'timeService', useFactory: upgradeTimeService, deps: [UpgradeModule] },
+		TimeService,
 	],
 })
 export class TimeServiceModule {}

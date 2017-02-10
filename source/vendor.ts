@@ -11,3 +11,6 @@ import '@angular/router';
 import '@angular/forms';
 import '@angular/platform-browser-dynamic';
 import '@angular/upgrade/static';
+
+import 'rxjs';
+import 'rxjs/add/operator/map';

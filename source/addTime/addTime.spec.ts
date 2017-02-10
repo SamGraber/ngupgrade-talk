@@ -6,14 +6,14 @@ describe('AddTimeComponent', () => {
 
 	beforeEach(() => {
 		timeService = { 
-			postTime: sinon.spy(() => ({ then: x => x() })),
+			postTime: sinon.spy(() => ({ subscribe: x => x() })),
 		};
 		component = new AddTimeComponent(timeService);
 	});
 	
 	it('should save the current time entry and then clear it', () => {
 		const time = { time: 2 };
-		component.time = time;
+		component.time = <any>time;
 		
 		component.saveTime();
 

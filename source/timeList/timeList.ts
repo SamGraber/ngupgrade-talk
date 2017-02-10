@@ -12,10 +12,10 @@ angular.module('timeList', [])
 timeListController.$inject = ['timeService'];
 function timeListController(timeService) {
 	var self = this;
-	timeService.getTimeList().then(data => self.timeList = data.map(setPace).map(formatTimes));
+	timeService.getTimeList().subscribe(data => self.timeList = data.map(setPace).map(formatTimes));
 
 	self.deleteTime = time => {
-		timeService.deleteTime(time).then(() => remove(self.timeList, time));
+		timeService.deleteTime(time).subscribe(() => remove(self.timeList, time));
 	};
 
 	function setPace(time) {

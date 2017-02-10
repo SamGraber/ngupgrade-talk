@@ -13,7 +13,7 @@ describe('goalController', () => {
 			getGoal: sinon.spy(() => ({ then: x => x(initialGoal) })),
 			putGoal: sinon.spy(() => ({ then: x => x() })),
 		};
-		timeService = { getTimeList: sinon.spy(() => ({ then: x => x(initialTimeList) })) }
+		timeService = { getTimeList: sinon.spy(() => ({ subscribe: x => x(initialTimeList) })) }
 		inject($componentController => {
 			ctrl = $componentController('goal', { goalService, timeService });
 		});
