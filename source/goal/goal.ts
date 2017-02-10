@@ -1,3 +1,4 @@
+import { calculatePace, toDate } from '../services/utility';
 
 angular.module('goal', [])
 	.component('goal', {

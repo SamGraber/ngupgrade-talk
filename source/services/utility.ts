@@ -1,12 +1,12 @@
-function calculatePace(time) {
+export function calculatePace(time) {
 	return time.time / time.distance;
 }
 
-function toDate(minutes) {
+export function toDate(minutes) {
 	return new Date(minutes * 60000);
 }
 
-function remove(array, item) {
+export function remove(array, item) {
 	var index = array.indexOf(item);
 
 	if (index !== -1) {

@@ -1,3 +1,5 @@
+import { calculatePace, toDate, remove } from './utility';
+
 describe('utility', () => {
 	describe('calculatePace', () => {
 		it('should calculate pace as time divided by distance', () => {

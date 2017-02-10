@@ -47,7 +47,6 @@ function baseConfig(karma) {
 		],
 
 		files: [
-			{ pattern: 'source/services/utility.js', included: true, watched: true },
 			{ pattern: 'config/karma-test-setup.js', included: true, watched: true },
 		],
 

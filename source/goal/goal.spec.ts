@@ -1,3 +1,5 @@
+import { toDate } from '../services/utility';
+
 describe('goalController', () => {
 	var ctrl;
 	var goalService;

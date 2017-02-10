@@ -1,4 +1,6 @@
 
+import { calculatePace, toDate, remove } from '../services/utility';
+
 angular.module('timeList', [])
 	.component('timeList', {
 		templateUrl: 'source/timeList/timeList.html',

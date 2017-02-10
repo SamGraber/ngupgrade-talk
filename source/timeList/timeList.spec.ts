@@ -1,3 +1,5 @@
+import { toDate } from '../services/utility';
+
 describe('timeListController', () => {
 	var ctrl;
 	var timeService;
