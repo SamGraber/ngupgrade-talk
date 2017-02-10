@@ -15,3 +15,6 @@ declare var angular: angular.IAngularStatic;
 
 // sinon global
 declare var sinon: sinon.SinonStatic;
+
+// needed for the template loader
+declare var require: any;

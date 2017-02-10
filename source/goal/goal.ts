@@ -2,7 +2,7 @@ import { calculatePace, toDate } from '../services/utility';
 
 angular.module('goal', [])
 	.component('goal', {
-		templateUrl: 'source/goal/goal.html',
+		templateUrl: './goal.html',
 		controller: goalController,
 	});
 

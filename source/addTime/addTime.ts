@@ -1,7 +1,7 @@
 
 angular.module('addTime', [])
 	.component('addTime', {
-		templateUrl: 'source/addTime/addTime.html',
+		templateUrl: './addTime.html',
 		controller: addTimeController,
 	});
 

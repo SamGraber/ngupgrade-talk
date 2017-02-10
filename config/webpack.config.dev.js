@@ -34,7 +34,8 @@ module.exports = {
 	],
 	module: {
 		loaders: [
-			{ test: /\.ts$/, exclude: /node_modules/, loaders: ['awesome-typescript-loader'] },
+			{ test: /\.ts$/, exclude: /node_modules/, loaders: ['awesome-typescript-loader', 'angular2-template-loader'] },
+			{ test: /\.html$/, loader: 'raw-loader' },
 		],
 		preLoaders: [
 			{ test: /\.js$/, loader: 'source-map-loader' },
