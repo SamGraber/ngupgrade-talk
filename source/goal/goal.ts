@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { calculatePace, toDate } from '../services/utility';
 
 angular.module('goal', [])
@@ -32,3 +34,6 @@ function goalController(goalService, timeService) {
 		return total / timeList.length;
 	}
 }
+
+@NgModule({})
+export class GoalModule {}

@@ -1,4 +1,6 @@
 
+import { NgModule } from '@angular/core';
+
 import { calculatePace, toDate, remove } from '../services/utility';
 
 angular.module('timeList', [])
@@ -34,3 +36,6 @@ function timeListController(timeService) {
 		};
 	}
 }
+
+@NgModule({})
+export class TimeListModule {}

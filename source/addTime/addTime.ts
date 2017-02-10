@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 
 angular.module('addTime', [])
 	.component('addTime', {
@@ -12,3 +13,6 @@ function addTimeController(timeService) {
 		timeService.postTime(self.time).then(() => self.time = null);
 	};
 }
+
+@NgModule({})
+export class AddTimeModule {}

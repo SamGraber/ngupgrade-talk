@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 
 angular.module('timeService', [])
 	.service('timeService', timeService);
@@ -12,3 +13,6 @@ function timeService($http) {
 	this.postTime = time => self.$http.post(baseUrl + '/time', time).then(response => response.data);
 	this.deleteTime = time => self.$http.delete(baseUrl + '/time/' + time.id);
 }
+
+@NgModule({})
+export class TimeServiceModule {}
