@@ -31,6 +31,12 @@ module.exports = {
 			template: 'index.html',
 			inject: true,
 		}),
+		
+		// Workaround for angular/angular#11580
+		new webpack.ContextReplacementPlugin(
+			/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+			__dirname
+		),
 	],
 	module: {
 		loaders: [

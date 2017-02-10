@@ -54,6 +54,12 @@ module.exports = {
 
 		// Minify JS
 		new webpack.optimize.UglifyJsPlugin(),
+		
+		// Workaround for angular/angular#11580
+		new webpack.ContextReplacementPlugin(
+			/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+			__dirname
+		),
 	],
 	module: {
 		loaders: [
