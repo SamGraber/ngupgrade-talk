@@ -1,23 +1,24 @@
-describe('addTimeController', () => {
-	var ctrl;
-	var timeService;
+import { AddTimeComponent } from './addTime';
+
+describe('AddTimeComponent', () => {
+	let component: AddTimeComponent;
+	let timeService;
 
 	beforeEach(() => {
-		angular.mock.module('addTime');
-		timeService = { postTime: sinon.spy(() => ({ then: x => x() })) }
-		inject($componentController => {
-			ctrl = $componentController('addTime', { timeService });
-		});
+		timeService = { 
+			postTime: sinon.spy(() => ({ then: x => x() })),
+		};
+		component = new AddTimeComponent(timeService);
 	});
 	
 	it('should save the current time entry and then clear it', () => {
-		var time = {};
-		ctrl.time = time;
+		const time = { time: 2 };
+		component.time = time;
 		
-		ctrl.saveTime();
+		component.saveTime();
 
 		sinon.assert.calledOnce(timeService.postTime);
 		expect(timeService.postTime.firstCall.args[0]).to.equal(time);
-		expect(ctrl.time).to.be.null;
+		expect(component.time).to.be.empty;
 	});
 });
