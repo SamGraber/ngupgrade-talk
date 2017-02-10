@@ -6,6 +6,7 @@
   "scripts": {
     "json-server": "json-server --watch data.json",
     "webpack-dev-server": "webpack-dev-server --config config/webpack.config.dev.js --inline --hot --open",
+    "build.prod": "webpack --config config/webpack.config.prod.js",
     "start": "npm-run-all --parallel json-server webpack-dev-server",
     "test": "karma start config/karma.conf.js"
   },

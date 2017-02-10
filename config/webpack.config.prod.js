@@ -11,8 +11,8 @@ module.exports = {
 		extensions: ['.webpack.js', '.web.js', '.ts', '.js']
 	},
 	entry: {
-		vendor: path.resolve(__dirname, '../client/vendor'),
-		main: path.resolve(__dirname, '../client/app.module'),
+		vendor: path.resolve(__dirname, '../source/vendor'),
+		main: path.resolve(__dirname, '../source/index'),
 	},
 	target: 'web',
 	output: {
