@@ -1,6 +1,6 @@
 import { NgModule, Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UpgradeModule, downgradeComponent } from '@angular/upgrade/static';
+import { RouterModule } from '@angular/router';
 
 import { ITimeEntry, TimeService } from '../services/time.service';
 
@@ -18,15 +18,10 @@ export class AddTimeComponent {
 	}
 }
 
-angular.module('addTime', [])
-	.directive('addTime', downgradeComponent({
-		component: AddTimeComponent,
-	}));
-
 @NgModule({
 	imports: [
 		FormsModule, 
-		UpgradeModule,
+		RouterModule.forChild([{ path: 'addtime', component: AddTimeComponent }]),
 	],
 	entryComponents: [AddTimeComponent],
 	declarations: [AddTimeComponent],

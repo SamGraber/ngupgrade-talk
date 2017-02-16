@@ -1,4 +1,3 @@
-/// <reference types="angular" />
 /// <reference types="sinon" />
 
 // Jasmine
@@ -9,9 +8,6 @@ declare var afterEach;
 
 // Chai globals
 declare var expect: Chai.ExpectStatic;
-
-// angular global
-declare var angular: angular.IAngularStatic;
 
 // sinon global
 declare var sinon: sinon.SinonStatic;

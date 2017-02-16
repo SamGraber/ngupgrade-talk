@@ -1,7 +1,6 @@
 import { NgModule, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { downgradeComponent } from '@angular/upgrade/static';
 
 import { TimeService } from '../services/time.service';
 import { calculatePace, toDate, remove } from '../services/utility';
@@ -48,11 +47,6 @@ export class TimeListComponent implements OnInit {
 		};
 	}
 }
-
-angular.module('timeList', [])
-	.directive('timeList', downgradeComponent({
-		component: TimeListComponent,
-	}));
 
 @NgModule({
 	imports: [

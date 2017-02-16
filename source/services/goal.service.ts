@@ -1,10 +1,6 @@
 import { NgModule, Injectable } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
-import { downgradeInjectable } from '@angular/upgrade/static';
 import { Observable } from 'rxjs';
-
-angular.module('goalService', [])
-	.service('goalService', downgradeInjectable(GoalService));
 
 const baseUrl = 'http://localhost:3000';
 

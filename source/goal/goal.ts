@@ -1,7 +1,7 @@
 import { NgModule, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { downgradeComponent } from '@angular/upgrade/static';
+import { RouterModule } from '@angular/router';
 
 import { GoalService } from '../services/goal.service';
 import { TimeService, ITimeEntry } from '../services/time.service';
@@ -51,15 +51,11 @@ export class GoalComponent implements OnInit {
 	}
 }
 
-angular.module('goal', [])
-	.directive('goal', downgradeComponent({
-		component: GoalComponent,
-	}));
-
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
+		RouterModule.forChild([{ path: 'goal', component: GoalComponent }]),
 	],
 	declarations: [GoalComponent],
 	entryComponents: [GoalComponent],

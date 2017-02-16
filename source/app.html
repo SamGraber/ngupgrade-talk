@@ -1,14 +1,13 @@
 <div class="container">
 	<nav class="navbar">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#home">Running calculator</a>
+			<a class="navbar-brand" routerLink="/home">Running calculator</a>
 		</div>
 		<ul class="nav navbar-nav">
 			<li><a routerLink="/timelist">Time list</a></li>
-			<li><a href="#addtime">Add time</a></li>
-			<li><a href="#goal">Goal</a></li>
+			<li><a routerLink="/addtime">Add time</a></li>
+			<li><a routerLink="/goal">Goal</a></li>
 		</ul>
 	</nav>
 	<router-outlet></router-outlet>
-	<div ng-view></div>
 </div>

@@ -1,6 +1,5 @@
 import { NgModule, Injectable } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
-import { downgradeInjectable } from '@angular/upgrade/static';
 import { Observable } from 'rxjs';
 
 export interface ITimeEntry {
@@ -27,9 +26,6 @@ export class TimeService {
 		return this.http.delete(baseUrl + '/time/' + time.id).map(() => null);
 	}
 }
-
-angular.module('timeService', [])
-	.service('timeService', downgradeInjectable(TimeService));
 
 @NgModule({
 	imports: [
