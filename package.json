@@ -38,7 +38,6 @@
     "@types/angular-mocks": "^1.5.9",
     "@types/chai": "^3.4.34",
     "@types/sinon": "^1.16.35",
-    "@types/webpack-dev-middleware": "^1.9.1",
     "angular-mocks": "^1.6.2",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.0.0-beta.18",
