@@ -20,7 +20,7 @@ const appRoutes = [
 	imports: [
 		BrowserModule,
 
-		RouterModule.forRoot(appRoutes, { useHash: true, initialNavigation: true }),
+		RouterModule.forRoot(appRoutes),
 
 		TimeListModule,
 		AddTimeModule,
