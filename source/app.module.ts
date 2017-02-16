@@ -10,6 +10,7 @@ import { TimeServiceModule } from './services/time.service';
 import { GoalServiceModule } from './services/goal.service';
 
 import { App } from './app';
+import { WelcomeComponent } from './welcome';
 
 angular.module('runCalculatorApp', [
 	'ngRoute',
@@ -23,18 +24,26 @@ angular.module('runCalculatorApp', [
 
 class Ng1Ng2UrlHandlingStrategy implements UrlHandlingStrategy {
 	shouldProcessUrl(url) {
-		return url.toString().startsWith('/timelist');
+		url = url.toString();
+		return url.startsWith('/timelist') 
+			|| url.startsWith('/home')
+			|| url === '/';
 	}
 	extract(url) { return url; }
 	merge(url, whole) { return url; }
 }
+
+const appRoutes = [
+	{ path: '', redirectTo: '/home', pathMatch: 'full' },
+	{ path: 'home', component: WelcomeComponent },
+];
 
 @NgModule({
 	imports: [
 		BrowserModule,
 		UpgradeModule,
 
-		RouterModule.forRoot([], { useHash: true, initialNavigation: false }),
+		RouterModule.forRoot(appRoutes, { useHash: true, initialNavigation: true }),
 
 		TimeListModule,
 		AddTimeModule,
@@ -43,7 +52,7 @@ class Ng1Ng2UrlHandlingStrategy implements UrlHandlingStrategy {
 		GoalServiceModule,
 	],
 	bootstrap: [App],
-	declarations: [App],
+	declarations: [App, WelcomeComponent],
 	providers: [
 		{ provide: UrlHandlingStrategy, useClass: Ng1Ng2UrlHandlingStrategy },
 	],
