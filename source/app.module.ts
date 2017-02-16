@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 
 import { TimeListModule } from './timeList/timeList';
 import { AddTimeModule } from './addTime/addTime';
@@ -20,10 +21,20 @@ angular.module('runCalculatorApp', [
 	'goalService',
 ]);
 
+class Ng1Ng2UrlHandlingStrategy implements UrlHandlingStrategy {
+	shouldProcessUrl(url) {
+		return url.toString().startsWith('/timelist');
+	}
+	extract(url) { return url; }
+	merge(url, whole) { return url; }
+}
+
 @NgModule({
 	imports: [
 		BrowserModule,
 		UpgradeModule,
+
+		RouterModule.forRoot([], { useHash: true, initialNavigation: false }),
 
 		TimeListModule,
 		AddTimeModule,
@@ -33,7 +44,10 @@ angular.module('runCalculatorApp', [
 	],
 	bootstrap: [App],
 	declarations: [App],
+	providers: [
+		{ provide: UrlHandlingStrategy, useClass: Ng1Ng2UrlHandlingStrategy },
+	],
 })
 export class AppModule {
-	constructor(public upgrade: UpgradeModule) {}
+	constructor(public upgrade: UpgradeModule) { }
 }

@@ -1,5 +1,6 @@
 import { NgModule, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { downgradeComponent } from '@angular/upgrade/static';
 
 import { TimeService } from '../services/time.service';
@@ -54,7 +55,10 @@ angular.module('timeList', [])
 	}));
 
 @NgModule({
-	imports: [CommonModule],
+	imports: [
+		CommonModule,
+		RouterModule.forChild([{ path: 'timelist', component: TimeListComponent }]),
+	],
 	declarations: [TimeListComponent],
 	entryComponents: [TimeListComponent],
 })
