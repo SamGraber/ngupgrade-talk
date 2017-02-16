@@ -2,7 +2,7 @@
   "name": "ngupgrade-talk",
   "version": "1.0.0",
   "description": "Upgrade an angular 1 application to angular 2",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "json-server": "json-server --watch data.json",
     "webpack-dev-server": "webpack-dev-server --config config/webpack.config.dev.js --inline --hot --open",
