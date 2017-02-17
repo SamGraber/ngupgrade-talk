@@ -9,14 +9,14 @@ describe('utility', () => {
 		});
 	});
 
-	describe('calculatePace', () => {
+	describe('toDate', () => {
 		it('should convert to a date using the number of minutes', () => {
 			expect(toDate(10).getMinutes()).to.equal(10);
 			expect(toDate(5).getMinutes()).to.equal(5);
 		});
 	});
 	
-	describe('calculatePace', () => {
+	describe('remove', () => {
 		it('should remove the item from the array', () => {
 			var array = [1, 2, 3];
 			var expectedResult = [1, 3];
